@@ -1,0 +1,13 @@
+{
+  "buildCommand": "echo 'Static files only'",
+  "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "functions": {},
+  "routes": [
+    {
+      "src": "/(?!.*\\.(?:css|js|png|jpg|jpeg|svg|ico|gif)$).*",
+      "dest": "/index.html"
+    }
+  ]
+}
