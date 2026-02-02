@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Assignment Programs - Web Version</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1>📚 Java Assignment Programs</h1>
+            <p>Questions 5-11 Interactive Web Application</p>
+        </header>
+
+        <!-- Navigation -->
+        <nav class="nav-tabs">
+            <button class="nav-btn active" data-tab="calculator">Calculator</button>
+            <button class="nav-btn" data-tab="combinatorial">Combinatorial</button>
+            <button class="nav-btn" data-tab="mathtable">Math Table</button>
+            <button class="nav-btn" data-tab="q5">Q5: Array & String</button>
+            <button class="nav-btn" data-tab="q6">Q6: Age & Quadratic</button>
+            <button class="nav-btn" data-tab="q7">Q7: Quadratic Roots</button>
+            <button class="nav-btn" data-tab="q8">Q8: Operators</button>
+            <button class="nav-btn" data-tab="q9">Q9: Loops & Mean</button>
+            <button class="nav-btn" data-tab="q10">Q10: Weather</button>
+            <button class="nav-btn" data-tab="q11">Q11: Employee</button>
+        </nav>
+
+        <!-- Content Area -->
+        <main class="content">
+
+            <!-- Calculator -->
+            <section id="calculator" class="tab-content active">
+                <h2>🧮 Simple Calculator</h2>
+                
+                <div class="section">
+                    <h3>Basic Arithmetic Operations</h3>
+                    <div class="calculator-grid">
+                        <div class="form-group">
+                            <label for="calc-num1">First Number:</label>
+                            <input type="number" id="calc-num1" step="0.01" placeholder="Enter first number">
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-operator">Operation:</label>
+                            <select id="calc-operator">
+                                <option value="+">Addition (+)</option>
+                                <option value="-">Subtraction (-)</option>
+                                <option value="*">Multiplication (*)</option>
+                                <option value="/">Division (/)</option>
+                                <option value="%">Modulo (%)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="calc-num2">Second Number:</label>
+                            <input type="number" id="calc-num2" step="0.01" placeholder="Enter second number">
+                        </div>
+                    </div>
+                    <button onclick="performCalculation()" class="btn btn-primary">Calculate</button>
+                    <div id="calculator-result" class="result"></div>
+                </div>
+            </section>
+
+            <!-- Combinatorial (Q3) -->
+            <section id="combinatorial" class="tab-content">
+                <h2>🔢 Combinatorial: nCr Calculator</h2>
+                
+                <div class="section">
+                    <h3>Calculate Combinations: nCr = n! / ((n-r)! × r!)</h3>
+                    <div class="form-group">
+                        <label for="ncr-n">n (Total items):</label>
+                        <input type="number" id="ncr-n" min="0" max="100" placeholder="Enter n">
+                    </div>
+                    <div class="form-group">
+                        <label for="ncr-r">r (Items to choose):</label>
+                        <input type="number" id="ncr-r" min="0" max="100" placeholder="Enter r">
+                    </div>
+                    <button onclick="calculateNCr()" class="btn btn-primary">Calculate nCr</button>
+                    <div id="ncr-result" class="result"></div>
+                </div>
+            </section>
+
+            <!-- Math Table (Q4) -->
+            <section id="mathtable" class="tab-content">
+                <h2>📊 Mathematical Table Generator</h2>
+                
+                <div class="section">
+                    <h3>Generate Table: N, N², √N, N³, ∛N</h3>
+                    <div class="form-group">
+                        <label for="table-start">Start Value:</label>
+                        <input type="number" id="table-start" min="1" value="1" placeholder="Start">
+                    </div>
+                    <div class="form-group">
+                        <label for="table-end">End Value:</label>
+                        <input type="number" id="table-end" min="1" value="10" placeholder="End">
+                    </div>
+                    <button onclick="generateMathTable()" class="btn btn-primary">Generate Table</button>
+                    <div id="table-result" class="result"></div>
+                </div>
+            </section>
+
+            <!-- Q5: Array and String Operations -->
+            <section id="q5" class="tab-content">
+                <h2>Q5: Array and String Operations</h2>
+                
+                <div class="section">
+                    <h3>Part (A): Sum of Elements at Even Indexes</h3>
+                    <div class="form-group">
+                        <label for="q5-array-size">Array Size:</label>
+                        <input type="number" id="q5-array-size" min="1" placeholder="Enter size">
+                    </div>
+                    <button onclick="generateQ5ArrayInput()" class="btn">Generate Input Fields</button>
+                    <div id="q5-array-inputs" class="array-inputs"></div>
+                    <button onclick="calculateQ5EvenIndexSum()" class="btn btn-primary">Calculate Sum</button>
+                    <div id="q5-array-result" class="result"></div>
+                </div>
+
+                <div class="section">
+                    <h3>Part (B): Word Search and Count</h3>
+                    <div class="form-group">
+                        <label for="q5-text">Enter Text:</label>
+                        <textarea id="q5-text" rows="4" placeholder="Enter text document"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="q5-word">Search Word:</label>
+                        <input type="text" id="q5-word" placeholder="Enter word to search">
+                    </div>
+                    <button onclick="searchWord()" class="btn btn-primary">Search</button>
+                    <div id="q5-word-result" class="result"></div>
+                </div>
+            </section>
+
+            <!-- Q6: Age and Quadratic -->
+            <section id="q6" class="tab-content">
+                <h2>Q6: Age Classification & Quadratic Solver</h2>
+                
+                <div class="section">
+                    <h3>Part (A): Age Classification</h3>
+                    <div class="form-group">
+                        <label for="q6-age">Enter Age:</label>
+                        <input type="number" id="q6-age" min="0" max="150" placeholder="Enter age">
+                    </div>
+                    <button onclick="classifyAge()" class="btn btn-primary">Classify</button>
+                    <div id="q6-age-result" class="result"></div>
+                </div>
+
+                <div class="section">
+                    <h3>Part (B): Quadratic Equation Solver</h3>
+                    <p><em>Formula: ax² + bx + c = 0</em></p>
+                    <div class="form-group">
+                        <label for="q6-a">Coefficient a:</label>
+                        <input type="number" id="q6-a" step="0.01" placeholder="Enter a (non-zero)">
+                    </div>
+                    <div class="form-group">
+                        <label for="q6-b">Coefficient b:</label>
+                        <input type="number" id="q6-b" step="0.01" placeholder="Enter b">
+                    </div>
+                    <div class="form-group">
+                        <label for="q6-c">Coefficient c:</label>
+                        <input type="number" id="q6-c" step="0.01" placeholder="Enter c">
+                    </div>
+                    <button onclick="solveQuadraticQ6()" class="btn btn-primary">Solve</button>
+                    <div id="q6-quad-result" class="result"></div>
+                </div>
+            </section>
+
+            <!-- Q7: Quadratic Roots -->
+            <section id="q7" class="tab-content">
+                <h2>Q7: Quadratic Equation Roots Solver</h2>
+                <p><em>Formula: x = (-b ± √d) / 2a, where d = b² - 4ac</em></p>
+                
+                <div class="section">
+                    <div class="form-group">
+                        <label for="q7-a">Coefficient a:</label>
+                        <input type="number" id="q7-a" step="0.01" placeholder="Enter a (non-zero)">
+                    </div>
+                    <div class="form-group">
+                        <label for="q7-b">Coefficient b:</label>
+                        <input type="number" id="q7-b" step="0.01" placeholder="Enter b">
+                    </div>
+                    <div class="form-group">
+                        <label for="q7-c">Coefficient c:</label>
+                        <input type="number" id="q7-c" step="0.01" placeholder="Enter c">
+                    </div>
+                    <button onclick="solveQuadraticQ7()" class="btn btn-primary">Solve</button>
+                    <div id="q7-result" class="result"></div>
+                </div>
+            </section>
+
+            <!-- Q8: Operators and Arithmetic -->
+            <section id="q8" class="tab-content">
+                <h2>Q8: Operators and Arithmetic Operations</h2>
+                
+                <div class="section">
+                    <h3>Part (A): Operator Examples</h3>
+                    <button onclick="showOperatorExamples()" class="btn btn-primary">Show Examples</button>
+                    <div id="q8-operators" class="result"></div>
+                </div>
+
+                <div class="section">
+                    <h3>Part (B): Arithmetic Operations</h3>
+                    <div class="form-group">
+                        <label for="q8-numerator">Numerator:</label>
+                        <input type="number" id="q8-numerator" step="0.01" placeholder="Enter numerator">
+                    </div>
+                    <div class="form-group">
+                        <label for="q8-denominator">Denominator:</label>
+                        <input type="number" id="q8-denominator" step="0.01" placeholder="Enter denominator">
+                    </div>
+                    <button onclick="demonstrateArithmetic()" class="btn btn-primary">Calculate</button>
+                    <div id="q8-arithmetic" class="result"></div>
+                </div>
+
+                <div class="section">
+                    <h3>Part (C): Code Analysis</h3>
+                    <button onclick="showCodeAnalysis()" class="btn btn-primary">Show Analysis</button>
+                    <div id="q8-code" class="result"></div>
+                </div>
+            </section>
+
+            <!-- Q9: For Loops and Mean -->
+            <section id="q9" class="tab-content">
+                <h2>Q9: For Loops and Mean Calculation</h2>
+                
+                <div class="section">
+                    <h3>Part (A): For Loop Types</h3>
+                    <button onclick="showForLoopExamples()" class="btn btn-primary">Show Examples</button>
+                    <div id="q9-loops" class="result"></div>
+                </div>
+
+                <div class="section">
+                    <h3>Part (B): Calculate Mean and Statistics</h3>
+                    <div class="form-group">
+                        <label for="q9-array-size">Array Size:</label>
+                        <input type="number" id="q9-array-size" min="1" placeholder="Enter size">
+                    </div>
+                    <button onclick="generateQ9ArrayInput()" class="btn">Generate Input Fields</button>
+                    <div id="q9-array-inputs" class="array-inputs"></div>
+                    <button onclick="calculateQ9Statistics()" class="btn btn-primary">Calculate Statistics</button>
+                    <div id="q9-stats-result" class="result"></div>
+                </div>
+            </section>
+
+            <!-- Q10: Weather Station Analysis -->
+            <section id="q10" class="tab-content">
+                <h2>Q10: Weather Station Temperature Analysis</h2>
+                
+                <div class="section">
+                    <div class="form-group">
+                        <label for="q10-stations">Number of Stations:</label>
+                        <input type="number" id="q10-stations" min="1" max="10" placeholder="Enter number">
+                    </div>
+                    <div class="form-group">
+                        <label for="q10-readings">Readings per Station:</label>
+                        <input type="number" id="q10-readings" min="1" max="20" placeholder="Enter number">
+                    </div>
+                    <button onclick="generateQ10TemperatureInput()" class="btn">Generate Input Fields</button>
+                    <div id="q10-temp-inputs" class="array-inputs"></div>
+                    <button onclick="analyzeWeatherData()" class="btn btn-primary">Analyze</button>
+                    <div id="q10-weather-result" class="result"></div>
+                </div>
+            </section>
+
+            <!-- Q11: Employee Biodata -->
+            <section id="q11" class="tab-content">
+                <h2>Q11: Employee Biodata and Compensation</h2>
+                
+                <div class="section">
+                    <h3>Employee Registration</h3>
+                    <div class="form-group">
+                        <label for="q11-fname">First Name:</label>
+                        <input type="text" id="q11-fname" placeholder="Enter first name">
+                    </div>
+                    <div class="form-group">
+                        <label for="q11-lname">Last Name:</label>
+                        <input type="text" id="q11-lname" placeholder="Enter last name">
+                    </div>
+                    <div class="form-group">
+                        <label for="q11-dob">Year of Birth:</label>
+                        <input type="number" id="q11-dob" min="1950" max="2010" placeholder="Enter year">
+                    </div>
+                    <div class="form-group">
+                        <label for="q11-kin">Next of Kin:</label>
+                        <input type="text" id="q11-kin" placeholder="Enter next of kin">
+                    </div>
+                    <div class="form-group">
+                        <label for="q11-address">Residential Address:</label>
+                        <textarea id="q11-address" rows="3" placeholder="Enter address"></textarea>
+                    </div>
+                    <button onclick="registerEmployee()" class="btn btn-primary">Register Employee</button>
+                    <div id="q11-register-result" class="result"></div>
+
+                    <h3 style="margin-top: 30px;">Employee Registry</h3>
+                    <button onclick="displayEmployeeRegistry()" class="btn">View All Employees</button>
+                    <div id="q11-registry" class="result"></div>
+
+                    <button onclick="displayPayrollSummary()" class="btn">View Payroll Summary</button>
+                    <div id="q11-payroll" class="result"></div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Java Assignment Programs | Converted to Web Version</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
