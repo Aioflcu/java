@@ -1,0 +1,6 @@
+run = "python -m http.server 8000"
+channels = "ignore"
+language = "python3"
+
+[env]
+PYTHONUNBUFFERED = "1"

@@ -461,6 +461,57 @@ body {
     font-weight: 500;
 }
 
+/* Source Code Section */
+.source-code-section {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 2px solid #e0e0e0;
+}
+
+.source-code-display {
+    background: #1e1e1e;
+    border: 2px solid #333;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 15px;
+    overflow-x: auto;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        max-height: 2000px;
+        transform: translateY(0);
+    }
+}
+
+.source-code-display pre {
+    color: #e0e0e0;
+    font-family: 'Courier New', 'Consolas', monospace;
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.source-code-display code {
+    color: #e0e0e0;
+}
+
+/* Syntax Highlighting */
+.keyword { color: #569cd6; font-weight: bold; }
+.string { color: #ce9178; }
+.comment { color: #6a9955; font-style: italic; }
+.method { color: #dcdcaa; }
+.class { color: #4ec9b0; }
+
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
     width: 10px;

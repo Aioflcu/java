@@ -835,3 +835,343 @@ function showResult(elementId, content, type = 'info') {
     element.innerHTML = content;
     element.className = `result result-${type}`;
 }
+
+// Source code snippets
+const sourceCodeSnippets = {
+    calculator: `public class Calculator {
+    private double number1;
+    private double number2;
+    private char operator;
+    private double result;
+
+    public void getInput() {
+        System.out.print("Enter first number: ");
+        this.number1 = scanner.nextDouble();
+        System.out.print("Enter operator (+, -, *, /, %): ");
+        this.operator = scanner.next().charAt(0);
+        System.out.print("Enter second number: ");
+        this.number2 = scanner.nextDouble();
+    }
+
+    public double calculate() {
+        switch(operator) {
+            case '+': result = number1 + number2; break;
+            case '-': result = number1 - number2; break;
+            case '*': result = number1 * number2; break;
+            case '/': 
+                if(number2 == 0) throw new ArithmeticException("Division by zero");
+                result = number1 / number2; 
+                break;
+            case '%': 
+                if(number2 == 0) throw new ArithmeticException("Modulo by zero");
+                result = number1 % number2; 
+                break;
+        }
+        return result;
+    }
+}`,
+
+    combinatorial: `public class Combinatorial {
+    private int n;
+    private int r;
+    private long nCrValue;
+    private static HashMap<Integer, Long> factorialCache = new HashMap<>();
+
+    public void setValues(int n, int r) {
+        this.n = n;
+        this.r = r;
+    }
+
+    private static long calculateFactorial(int num) {
+        if(factorialCache.containsKey(num)) return factorialCache.get(num);
+        if(num == 0 || num == 1) return 1;
+        
+        long result = 1;
+        for(int i = 2; i <= num; i++) {
+            result *= i;
+        }
+        factorialCache.put(num, result);
+        return result;
+    }
+
+    public void calculateNCr() {
+        long nFactorial = calculateFactorial(n);
+        long rFactorial = calculateFactorial(r);
+        long nMinusRFactorial = calculateFactorial(n - r);
+        this.nCrValue = nFactorial / (nMinusRFactorial * rFactorial);
+    }
+
+    public void displayCalculation() {
+        System.out.println("nCr = n! / ((n-r)! × r!)");
+        System.out.println(n + "C" + r + " = " + nCrValue);
+    }
+}`,
+
+    mathtable: `public class MathTable {
+    private int n;
+    private double nSquared;
+    private double nSquareRoot;
+    private double nCube;
+    private double nCubeRoot;
+    private List<TableRow> tableRows;
+
+    public void setNumber(int n) {
+        this.n = n;
+        this.nSquared = n * n;
+        this.nSquareRoot = Math.sqrt(n);
+        this.nCube = n * n * n;
+        this.nCubeRoot = Math.cbrt(n);
+    }
+
+    public void generateTable(int start, int end) {
+        tableRows = new ArrayList<>();
+        for(int i = start; i <= end; i++) {
+            setNumber(i);
+            TableRow row = new TableRow(n, nSquared, nSquareRoot, nCube, nCubeRoot);
+            tableRows.add(row);
+        }
+    }
+
+    public void displayTable() {
+        System.out.println("N\\tN²\\t√N\\tN³\\t∛N");
+        for(TableRow row : tableRows) {
+            System.out.printf("%d\\t%d\\t%.4f\\t%d\\t%.4f%n",
+                row.n, row.nSquared, row.nSquareRoot, row.nCube, row.nCubeRoot);
+        }
+    }
+
+    private class TableRow {
+        int n, nSquared, nCube;
+        double nSquareRoot, nCubeRoot;
+        
+        TableRow(int n, double nSq, double nSqrt, double nCb, double nCbrt) {
+            this.n = n;
+            this.nSquared = (int)nSq;
+            this.nSquareRoot = nSqrt;
+            this.nCube = (int)nCb;
+            this.nCubeRoot = nCbrt;
+        }
+    }
+}`,
+
+    q5: `public class Q5_ArrayAndStringOperations {
+    public static long sumEvenIndexes(int[] arr) {
+        long sum = 0;
+        for(int i = 2; i < arr.length; i += 2) {
+            sum += arr[i];
+        }
+        return sum;
+    }
+
+    public static int countWordOccurrences(String text, String word) {
+        String[] words = text.toLowerCase().split("\\\\s+|[.,!?;:\\\"-]+");
+        int count = 0;
+        for(String w : words) {
+            if(w.equals(word.toLowerCase())) count++;
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        int[] numbers = {10, 20, 30, 40, 50, 60};
+        System.out.println("Sum of even indexes: " + sumEvenIndexes(numbers));
+        
+        String text = "Hello world. Hello Java. Hello!";
+        System.out.println("'Hello' appears: " + countWordOccurrences(text, "hello") + " times");
+    }
+}`,
+
+    q6: `public class Q6_AgeAndQuadratic {
+    public void classifyAge(int age) {
+        if(age < 5) System.out.println("Early Childhood");
+        else if(age < 13) System.out.println("Child");
+        else if(age < 18) System.out.println("Teenager");
+        else if(age < 65) System.out.println("Adult");
+        else System.out.println("Senior");
+    }
+
+    public void solveQuadratic(double a, double b, double c) {
+        double discriminant = b*b - 4*a*c;
+        if(discriminant > 0) {
+            double root1 = (-b + Math.sqrt(discriminant)) / (2*a);
+            double root2 = (-b - Math.sqrt(discriminant)) / (2*a);
+            System.out.println("Two roots: " + root1 + ", " + root2);
+        } else if(discriminant == 0) {
+            System.out.println("One root: " + (-b/(2*a)));
+        } else {
+            System.out.println("Complex roots");
+        }
+    }
+}`,
+
+    q7: `public class Q7_QuadraticRoots {
+    private double a, b, c;
+    private double discriminant;
+    private double root1, root2;
+    private List<String> solutionHistory = new ArrayList<>();
+
+    public void calculateRoots(double a, double b, double c) {
+        this.a = a;
+        this.b = b;
+        this.c = c;
+        this.discriminant = b*b - 4*a*c;
+        
+        if(discriminant > 0) {
+            double sqrt_d = Math.sqrt(discriminant);
+            this.root1 = (-b + sqrt_d) / (2*a);
+            this.root2 = (-b - sqrt_d) / (2*a);
+        } else if(discriminant == 0) {
+            this.root1 = this.root2 = -b / (2*a);
+        }
+        
+        solutionHistory.add("Solved: " + a + "x² + " + b + "x + " + c);
+    }
+
+    public void verifyRoots() {
+        double check1 = a*root1*root1 + b*root1 + c;
+        double check2 = a*root2*root2 + b*root2 + c;
+        System.out.println("Verification: " + check1 + ", " + check2);
+    }
+}`,
+
+    q8: `public class Q8_OperatorsAndArithmetic {
+    public static void main(String[] args) {
+        // Logical OR (||)
+        boolean a = true, b = false;
+        System.out.println("a || b = " + (a || b)); // true
+        
+        // Logical AND (&&)
+        System.out.println("a && b = " + (a && b)); // false
+        
+        // Bitwise XOR (^)
+        int x = 5, y = 3;
+        System.out.println("x ^ y = " + (x ^ y)); // 6
+        
+        // Real vs Integer Division
+        System.out.println("10 / 3 = " + (10.0 / 3)); // 3.333...
+        System.out.println("10 // 3 = " + (10 / 3)); // 3
+        System.out.println("10 % 3 = " + (10 % 3)); // 1
+    }
+}`,
+
+    q9: `public class Q9_ForLoopsAndMean {
+    public static void main(String[] args) {
+        // Up-counting for loop
+        for(int i = 1; i <= 5; i++) {
+            System.out.print(i + " "); // 1 2 3 4 5
+        }
+        
+        // Down-counting for loop
+        for(int i = 5; i >= 1; i--) {
+            System.out.print(i + " "); // 5 4 3 2 1
+        }
+        
+        // Calculate mean
+        double[] numbers = {10, 20, 30, 40, 50};
+        double sum = 0;
+        for(double num : numbers) sum += num;
+        double mean = sum / numbers.length;
+        System.out.println("Mean: " + mean); // 30.0
+    }
+
+    public static double calculateMedian(double[] arr) {
+        Arrays.sort(arr);
+        if(arr.length % 2 == 0) {
+            return (arr[arr.length/2-1] + arr[arr.length/2]) / 2;
+        }
+        return arr[arr.length/2];
+    }
+}`,
+
+    q10: `public class Q10_WeatherStationAnalysis {
+    private int numStations;
+    private int numReadings;
+    private double[][] temperatureData;
+    private double[] stationMeans;
+    private double overallMean;
+
+    public void initializeStations(int n, int m) {
+        this.numStations = n;
+        this.numReadings = m;
+        this.temperatureData = new double[n][m];
+        this.stationMeans = new double[n];
+    }
+
+    public void calculateStationMeans() {
+        for(int i = 0; i < numStations; i++) {
+            double sum = 0;
+            for(int j = 0; j < numReadings; j++) {
+                sum += temperatureData[i][j];
+            }
+            stationMeans[i] = sum / numReadings;
+        }
+    }
+
+    public void calculateOverallMean() {
+        double sum = 0;
+        for(double mean : stationMeans) sum += mean;
+        this.overallMean = sum / numStations;
+    }
+}`,
+
+    q11: `public class Q11_EmployeeBiodata {
+    private String firstName;
+    private String lastName;
+    private int yearOfBirth;
+    private String nextOfKin;
+    private String residentialAddress;
+    private static final int GROSS_PAY = 100000;
+    private static final int RETIREMENT_AGE = 65;
+    private static List<Q11_EmployeeBiodata> employeeRegistry = new ArrayList<>();
+
+    public void captureEmployeeBiodata(Scanner scanner) {
+        System.out.print("First Name: ");
+        this.firstName = scanner.nextLine();
+        System.out.print("Last Name: ");
+        this.lastName = scanner.nextLine();
+        System.out.print("Year of Birth: ");
+        this.yearOfBirth = scanner.nextInt();
+        scanner.nextLine();
+        System.out.print("Next of Kin: ");
+        this.nextOfKin = scanner.nextLine();
+    }
+
+    public int calculateRetirementYear() {
+        return yearOfBirth + RETIREMENT_AGE;
+    }
+
+    public void calculateDeductions() {
+        double taxDeduction = GROSS_PAY * 0.125;
+        double pensionDeduction = GROSS_PAY * 0.075;
+        double healthDeduction = GROSS_PAY * 0.05;
+        double housingDeduction = GROSS_PAY * 0.05;
+        System.out.println("Tax: " + taxDeduction);
+        System.out.println("Net Pay: " + (GROSS_PAY - taxDeduction - pensionDeduction - healthDeduction - housingDeduction));
+    }
+}`
+};
+
+function toggleSourceCode(programId) {
+    const sourceDiv = document.getElementById(`${programId}-source`);
+    const btn = event.target;
+    
+    if(sourceDiv.style.display === 'none') {
+        sourceDiv.style.display = 'block';
+        sourceDiv.innerHTML = `<pre>${escapeHtml(sourceCodeSnippets[programId])}</pre>`;
+        btn.textContent = '📄 Hide Source Code';
+    } else {
+        sourceDiv.style.display = 'none';
+        btn.textContent = '📄 View Source Code';
+    }
+}
+
+function escapeHtml(text) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, m => map[m]);
+}
